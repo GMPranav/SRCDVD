@@ -16,6 +16,7 @@ class Data:
 		self.twitchTemplate = ["twitch"]
 		self.runsArray = []
 		self.dead_runs = []
+		self.offset = 200
 
 	def getRuns(self):
 		try:
@@ -47,7 +48,7 @@ class Data:
 	# Most likely, we'll have to add some extra code to check if link to video exists in comments. (Weird)
 	#
 	def getLinks(self):
-		for offset in range(0, self.runsCount, 200):
+		for offset in range(0, self.runsCount+self.offset, self.offset):
 			url = "https://www.speedrun.com/api/v1/runs?max=200&offset=" + \
 				str(offset) + "&status=verified&game=" + self.gameID
 			response = requests.get(url)
