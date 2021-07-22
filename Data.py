@@ -14,7 +14,7 @@ class Data:
 		self.twitchLinks = []
 		self.youtubeTemplate = ["youtube", "youtu"]
 		self.twitchTemplate = ["twitch"]
-		self.Links = []
+		self.runsArray = []
 		self.dead_runs = []
 
 	def getRuns(self):
@@ -58,7 +58,7 @@ class Data:
 						try:
 							link = runs['videos']['links'][0]['uri']
 							self.videoLinks.append(link)
-							self.Links.append({"runID": runs['id'], "link": link})
+							self.runsArray.append({"runID": runs['id'], "link": link})
 						# The TypeError exception is used here to take a runID
 						# from a run where 'links' key exists but is empty
 						#

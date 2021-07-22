@@ -10,15 +10,16 @@ class TwitchAPI:
 			"grant_type": 'client_credentials'
 		}
 		self.twitchAuthAPIKey = ""
-		self.token = ""
 
 	def auth(self):
 		self.body['client_id'] = input("Enter Client-ID: ")
 		self.body['client_secret'] = input("Enter Client Secret: ")
-		self.twitchAuthAPIKey = requests.post(
-			'https://id.twitch.tv/oauth2/token', self.body).json()['access_token']
-		self.header = {'Client-ID': self.body['client_id'],
-                'Authorization': "Bearer "+self.twitchAuthAPIKey}
+		response = requests.post(
+			'https://id.twitch.tv/oauth2/token', self.body)
+		if response.status_code == 200:
+			self.twitchAuthAPIKey = response.json()['access_token']
+			self.header = {'Client-ID': self.body['client_id'],
+			'Authorization': "Bearer "+self.twitchAuthAPIKey}
 
 	def checkVideo(self, videoLink):
 		try:
@@ -31,7 +32,8 @@ class TwitchAPI:
 					# Return link if it dead
 					if response.json()['status'] == 404:
 						return videoLink
-		# Else do nothing
-		#
+		# KeyError occurs if a json object without a 'status' key
+		# is received in response from the server 
+		# In principle, if response code is 200, this should not happen
 		except KeyError:
 			pass

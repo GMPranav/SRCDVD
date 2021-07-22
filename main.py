@@ -32,10 +32,10 @@ if __name__ == '__main__':
 			missed.append(link)
 
 	for miss in missed:
-		for info in data.Links:
-			if miss == info['link']:
+		for run in data.runsArray:
+			if miss == run['link']:
 				data.dead_runs.append(
-					f"https://speedrun.com/{data.gameAbbriveature}/run/{info['runID']}")
+					f"https://speedrun.com/{data.gameAbbriveature}/run/{run['runID']}")
 
 	file = open("missinglinks.txt", "w")
 	for link in dict(Counter(data.dead_runs)):
