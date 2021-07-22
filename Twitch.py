@@ -1,7 +1,6 @@
 import requests
 import json
 import re
-import time
 
 class TwitchAPI:
 	def __init__(self) -> None:
@@ -33,5 +32,6 @@ class TwitchAPI:
 					if response.json()['status'] == 404:
 						return videoLink
 		# Else do nothing
+		#
 		except KeyError:
 			pass

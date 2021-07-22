@@ -6,20 +6,21 @@ from collections import Counter
 
 if __name__ == '__main__':
 	missed = []
-	dead_runs = []
 
 	twitch = Twitch.TwitchAPI()
 	google = Google.GoogleAPI()
 	twitch.auth()
 	google.auth()
 
-	data = Data.CData()
+	data = Data.Data()
 	data.getRuns()
 	data.getNameID()
 	data.getLinks()
 
-	# TODO: It may be worth paralleling the checks, at least for 4-8 threads
-	# And it is desirable to get rid of these "for"
+	# TODO: If moderators use this tool frequently,
+	#  it may be worth caching old runs to a file to speed things up,
+	#  so no reason to check over and over again every time they run it
+	#
 	for i in data.twitchLinks:
 		link = twitch.checkVideo(i)
 		if link:
@@ -33,8 +34,11 @@ if __name__ == '__main__':
 	for miss in missed:
 		for info in data.Links:
 			if miss == info['link']:
-				dead_runs.append(
-					f"https://speedrun.com/{data.gameAbriveature}/run/{info['runID']}")
-	# Print unique links
-	print(*Counter(dead_runs))
+				data.dead_runs.append(
+					f"https://speedrun.com/{data.gameAbbriveature}/run/{info['runID']}")
 
+	file = open("missinglinks.txt", "w")
+	for link in dict(Counter(data.dead_runs)):
+		file.write()
+		file.write("\n")
+	file.close()
