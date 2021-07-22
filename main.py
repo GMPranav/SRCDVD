@@ -17,7 +17,7 @@ if __name__ == '__main__':
 	data.getNameID()
 	data.getLinks()
 
-	# TODO: If moderators use this tool frequently,
+	# TODO: If moderators will use this tool frequently,
 	#  it may be worth caching old runs to a file to speed things up,
 	#  so no reason to check over and over again every time they run it
 	#
@@ -39,6 +39,6 @@ if __name__ == '__main__':
 
 	file = open("missinglinks.txt", "w")
 	for link in dict(Counter(data.dead_runs)):
-		file.write()
+		file.write(link)
 		file.write("\n")
 	file.close()
