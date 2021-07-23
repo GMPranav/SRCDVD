@@ -1,5 +1,7 @@
 # SRCDVD
 SRCDVD (**s**peed**r**un.**c**om **D**eleted **V**ideo **D**etector) is a tool to detect runs with unviewable (deleted/private/expired) YouTube and Twitch VODs for a given game in speedrun.com
+## Important Notice
+We are in the process of refactoring the code, which has introduced some bugs as expected. For urgent use, check out the old branch with the code before the refactoring process - https://github.com/GMPranav/SRCDVD/tree/old
 ## What this tool does exactly:
 This tool makes use of speedrun.com's [REST API](https://github.com/speedruncomorg/api) to gather the data of all the **verified** runs of a given game and stores it in a file named "data.txt", but the most important detail we would be needing is the video links of each run, which is isolated from "data.txt" and stored in "links.txt". It then checks for all the youtube links and twitch links in "links.txt" and gets the IDs of each VOD and checks its availability using [Google API v3](https://developers.google.com/youtube/v3) and [Twitch API](https://dev.twitch.tv/docs/api/) respectively. It then compares the IDs returned by the API to the original list to get the list of missing runs. It search for the ID in data.txt to find the src links to the appropriate runs, which is stored in "missinglinks.txt". You can skip either of YouTube or Twitch checks by tying skip instead of rhe respective authentication details.
 ## Prerequisites:
