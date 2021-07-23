@@ -10,6 +10,7 @@ class TwitchAPI:
 			"grant_type": 'client_credentials'
 		}
 		self.twitchAuthAPIKey = ""
+		self.header = {}
 
 	def auth(self):
 		self.body['client_id'] = input("Enter Client-ID: ")
