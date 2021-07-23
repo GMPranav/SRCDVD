@@ -11,6 +11,13 @@ class GoogleAPI:
 
 	def auth(self):
 		self.apiKey = input("Enter your Google API Key: ")
+		url = "https://www.googleapis.com/youtube/v3/videos?id=0&part=status&key="+self.apiKey
+		response = requests.get(url)
+		if response.status_code == 400:
+			print("[SKIP] API key not valid. Please pass a valid API key.")
+			return False
+		if response.status_code == 200:
+			return True
 
 	def getVideoID(self, videoLink):
 		id = re.compile(r'[A-Za-z0-9_\-]{11}')
