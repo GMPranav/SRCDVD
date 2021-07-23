@@ -55,28 +55,20 @@ The program requires python app to run. Do not worry, you dont require python pr
 - You will see a field called "Client ID" and also an option to create a "New Secret". Click on it. Now you will have both an ID and a secret, you can close your twitch dev console page for good. If you need later, you know where to find your ID and secret<br>
 ![image](https://user-images.githubusercontent.com/54983451/126482065-f7475550-c462-491b-b757-152e54d50409.png)
 
-- Visit https://github.com/GMPranav/SRCDVD/blob/main/gettwitchtoken.py and download the raw file
-
-- Run it and paste your client id and secret, your program will look something like this:
-![image](https://user-images.githubusercontent.com/54983451/126487104-a163a19e-4456-4fa7-8a89-af3215af38cb.png)
-
-- Note down your token in some notepad and close the program. Its worth noting that you will always have to use it with the term "Bearer" added as a prefix, so its worth saving it as "Bear <token> (with space) in your notepad.
-
 ## How to use the program:
-- Visit https://github.com/GMPranav/SRCDVD/blob/main/DataGen.py and download the raw file
+- Visit https://codeload.github.com/GMPranav/SRCDVD/zip/refs/heads/main and extract the ZIP file.
   
-- I would advise moving the program to a fresh folder so it would be easier to keep track of the files it generates.
+- I would advise keeping the contents of the program in a seperate folder.
   
-- Run the program. Enter the game's abbreviation in speedrun.com. For example, for Prince of Persia, it is "pop1".<br>
+- Run the program. Enter the your Twitch Client ID and secret and then your Google API key
+
+- Enter the game's abbreviation in speedrun.com. For example, for Prince of Persia, it is "pop1".<br>
   ![image](https://user-images.githubusercontent.com/54983451/126490521-751df7cf-9e0a-4a18-b2be-1c563b830e32.png)<br>
 ![image](https://user-images.githubusercontent.com/54983451/126490671-3d582cbd-6a0a-401b-9242-d00ce238cb7a.png)
 
-- Enter your Google API Key to scan the YouTube links or type "skip" to skip over.
+- After entering it will take a while especially for games with a lot of runs, so please be patient.
 
-- Enter your Twitch Client-ID and Auth token to scan the Twitch links or type "skip" to skip over. Note that you need to include the prefix 'Bearer' before the token as I mentioned earlier.
-  
-- All the affected runs should be stored in a file called "missinglinks.txt". Here is an example of how it looks like:<br>
-![image](https://user-images.githubusercontent.com/54983451/126491483-ddc5a87b-3ef2-4c5e-b1ea-f83fab127b85.png)
+- Once the program has finished running, all the links of affected runs should be stored in a file called "missinglinks.txt".
   
 ## Purpose of this tool and disclaimers:
 The primary purpose of this tool is for the moderators of the game to keep track of the runs without viewable VODs. A lot of games have a "video must" rule so this might be helpful for potentially rejecting the runs. Before doing so, please manually check if the video is indeed unplayable. This tool or its creator is not responsible for falsely rejected runs. One more thing - If a youtube video is private rather than deleted (you can tell if you open the embed in a new tab), try contacting the owner to make it unlisted/public first, they can do so in a single click and probably better than rejecting the run. At the end of the day its your decision and I just want to say I am not responsible for it.
