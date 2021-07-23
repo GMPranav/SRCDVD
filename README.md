@@ -55,7 +55,7 @@ The program requires python app to run. Do not worry, you dont require python pr
 - You will see a field called "Client ID" and also an option to create a "New Secret". Click on it. Now you will have both an ID and a secret, you can close your twitch dev console page for good. If you need later, you know where to find your ID and secret<br>
 ![image](https://user-images.githubusercontent.com/54983451/126482065-f7475550-c462-491b-b757-152e54d50409.png)
 
-- Visit https://github.com/GMPranav/SRCDVD/blob/main/gettwitchtoken.py and download the raw file
+- Visit https://github.com/GMPranav/SRCDVD/blob/old/gettwitchtoken.py and download the raw file
 
 - Run it and paste your client id and secret, your program will look something like this:
 ![image](https://user-images.githubusercontent.com/54983451/126487104-a163a19e-4456-4fa7-8a89-af3215af38cb.png)
@@ -63,7 +63,7 @@ The program requires python app to run. Do not worry, you dont require python pr
 - Note down your token in some notepad and close the program. Its worth noting that you will always have to use it with the term "Bearer" added as a prefix, so its worth saving it as "Bear <token> (with space) in your notepad.
 
 ## How to use the program:
-- Visit https://github.com/GMPranav/SRCDVD/blob/main/DataGen.py and download the raw file
+- Visit https://github.com/GMPranav/SRCDVD/blob/old/DataGen.py and download the raw file
   
 - I would advise moving the program to a fresh folder so it would be easier to keep track of the files it generates.
   
