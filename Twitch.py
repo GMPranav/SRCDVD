@@ -23,7 +23,7 @@ class TwitchAPI:
 			'Authorization': "Bearer "+ self.twitchAuthAPIKey}
 			return True
 		if response.status_code == 400:
-			print("[SKIP] Some of client key not valid. Please pass a valid client key.")
+			print("[SKIP] Some of client keys not valid. Please pass a valid client key.")
 			return False
 
 	def checkVideo(self, videoLink):
