@@ -22,7 +22,8 @@ if __name__ == '__main__':
 		#
 
 		for i in data.youtubeLinks:
-			link = google.getVideoID(i)
+			google.getVideoID(i)
+
 		missed = google.checkVideo()
 
 		for i in data.twitchLinks:
@@ -32,7 +33,7 @@ if __name__ == '__main__':
 
 		for miss in missed:
 			for run in data.runsArray:
-				if miss == run['link']:
+				if miss in run['link']:
 					data.dead_runs.append(
 						f"https://speedrun.com/{data.gameAbbriveature}/run/{run['runID']}")
 
