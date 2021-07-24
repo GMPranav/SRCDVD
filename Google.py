@@ -20,7 +20,7 @@ class GoogleAPI:
 			return True
 
 	def getVideoID(self, videoLink):
-		id = re.compile(r'[A-Za-z0-9_\-]{11}')
+		id = re.compile(r'([A-Za-z0-9_\-]{11}).*')
 		videoID = re.findall(id, videoLink)
 		if videoID:
 			self.videoIDArray.append(videoID.pop())

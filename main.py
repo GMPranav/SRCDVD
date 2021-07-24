@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
 		for miss in missed:
 			for run in data.runsArray:
-				if miss == run['link']:
+				if miss in run['link']:
 					data.dead_runs.append(
 						f"https://speedrun.com/{data.gameAbbriveature}/run/{run['runID']}")
 
