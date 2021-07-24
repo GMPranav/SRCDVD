@@ -31,7 +31,7 @@ class GoogleAPI:
 		id = re.compile(r'([A-Za-z0-9_\-]{11}).*')
 		videoID = re.findall(id, videoLink)
 		if videoID:
-			self.videoIDArray.append(videoID.pop()[1:])
+			self.videoIDArray.append(videoID.pop())
 
 	def checkVideo(self):
 		for offset in range(0, len(self.videoIDArray)+self.offset, self.offset):
