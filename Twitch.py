@@ -10,6 +10,7 @@ class TwitchAPI:
 			"grant_type": 'client_credentials'
 		}
 		self.twitchAuthAPIKey = ""
+		self.header = {}
 
 	def auth(self):
 		self.body['client_id'] = input("Enter Client-ID: ")
@@ -19,7 +20,11 @@ class TwitchAPI:
 		if response.status_code == 200:
 			self.twitchAuthAPIKey = response.json()['access_token']
 			self.header = {'Client-ID': self.body['client_id'],
-			'Authorization': "Bearer "+self.twitchAuthAPIKey}
+			'Authorization': "Bearer "+ self.twitchAuthAPIKey}
+			return True
+		if response.status_code == 400:
+			print("[SKIP] Some of client key not valid. Please pass a valid client key.")
+			return False
 
 	def checkVideo(self, videoLink):
 		try:
