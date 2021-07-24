@@ -28,7 +28,7 @@ class GoogleAPI:
 		#
 		# because the video id is associated with the run id, so if we pass on the channel name or part of the playlist, 
 		# google api decides that the link is invalid and marks the run with a broken link
-		id = re.compile(r'\/[A-Za-z0-9_\-]{11})',r'\=[A-Za-z0-9_\-]{11}')
+		id = re.compile(r'([A-Za-z0-9_\-]{11}).*')
 		videoID = re.findall(id, videoLink)
 		if videoID:
 			self.videoIDArray.append(videoID.pop()[1:])
