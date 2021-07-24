@@ -20,16 +20,16 @@ if __name__ == '__main__':
 		#  it may be worth caching old runs to a file to speed things up,
 		#  so no reason to check over and over again every time they run it
 		#
-
-		for i in data.youtubeLinks:
-			google.getVideoID(i)
-
-		missed = google.checkVideo()
-
-		for i in data.twitchLinks:
-			link = twitch.checkVideo(i)
-			if link:
-				missed.append(link)
+		if google_status:
+			for i in data.youtubeLinks:
+				link = google.getVideoID(i)
+			missed = google.checkVideo()
+			
+		if twitch_status:
+			for i in data.twitchLinks:
+				link = twitch.checkVideo(i)
+				if link:
+					missed.append(link)
 
 		for miss in missed:
 			for run in data.runsArray:
