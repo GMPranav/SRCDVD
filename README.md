@@ -1,24 +1,10 @@
 # SRCDVD
 SRCDVD (**s**peed**r**un.**c**om **D**eleted **V**ideo **D**etector) is a tool to detect runs with unviewable (deleted/private/expired) YouTube and Twitch VODs for a given game in speedrun.com
-## Important Notice
-We are in the process of refactoring the code, which has introduced some bugs as expected. For urgent use, check out the old branch with the code before the refactoring process - https://github.com/GMPranav/SRCDVD/tree/old
 ## What this tool does exactly:
 This tool makes use of speedrun.com's [REST API](https://github.com/speedruncomorg/api) to gather the data of all the **verified** runs of a given game and stores it in a file named "data.txt", but the most important detail we would be needing is the video links of each run, which is isolated from "data.txt" and stored in "links.txt". It then checks for all the youtube links and twitch links in "links.txt" and gets the IDs of each VOD and checks its availability using [Google API v3](https://developers.google.com/youtube/v3) and [Twitch API](https://dev.twitch.tv/docs/api/) respectively. It then compares the IDs returned by the API to the original list to get the list of missing runs. It search for the ID in data.txt to find the src links to the appropriate runs, which is stored in "missinglinks.txt". You can skip either of YouTube or Twitch checks by tying skip instead of rhe respective authentication details.
 ## Prerequisites:
-The program requires python app to run. Do not worry, you dont require python programming skills, this is just needed to run the .py files. The google and twitch APIs require authentication to use, so you will have to get your authentication details first. I will try to explain the process of doing so briefly. It might look complicated, but do not worry.
-### Setting up Python
-- Get python from https://www.python.org/
+The google and twitch APIs require authentication to use, so you will have to get your authentication details first. I will try to explain the process of doing so briefly. It might look complicated, but do not worry.
 
-- Open command prompt, type "pip install requests" and run enter. The "requests" module for python is required for this program.
-
-- If you get "pip is not recognised as an internal or external command", go to the python install folder, default is %UserProfile%\AppData\Local\Programs\Python\Python39
-
-- Go to the scripts folder. Copy the folder path from the address bar.
-
-- Open cmd and type "cd", give a space and paste the folder path and hit enter. For me it will look like this:<br>
-![image](https://user-images.githubusercontent.com/54983451/126489381-b68d759d-72af-4e15-b902-ebe552d80090.png)
-
-- Now try running "pip install requests" and it should work.
 ### Google API v3
 - First, you have to create a project in google dev console. Here is a handy link - https://console.cloud.google.com/projectcreate
 
@@ -58,11 +44,11 @@ The program requires python app to run. Do not worry, you dont require python pr
 ![image](https://user-images.githubusercontent.com/54983451/126482065-f7475550-c462-491b-b757-152e54d50409.png)
 
 ## How to use the program:
-- Visit https://codeload.github.com/GMPranav/SRCDVD/zip/refs/heads/main and extract the ZIP file.
+- Download the latest release - https://github.com/GMPranav/SRCDVD/releases/download/v1.0/main.exe (non-Windows users can download the code directy and exucute main.py through python)
   
-- I would advise keeping the contents of the program in a seperate folder.
+- I would advise keeping the executuable in a seperate folder.
   
-- Run the program. Enter the your Twitch Client ID and secret and then your Google API key
+- Run the program. Enter the your Twitch Client ID and secret and then your Google API key.
 
 - Enter the game's abbreviation in speedrun.com. For example, for Prince of Persia, it is "pop1".<br>
   ![image](https://user-images.githubusercontent.com/54983451/126490521-751df7cf-9e0a-4a18-b2be-1c563b830e32.png)<br>
