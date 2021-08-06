@@ -31,7 +31,9 @@ class GoogleAPI:
 			url = "https://www.googleapis.com/youtube/v3/videos?id=" + ids + "&part=status&key="+self.apiKey
 			response = requests.get(url)
 			if response.status_code == 200:
-				for offset in response.json()['items']:
-					self.notPrivate.append(offset['id'])
+				# List all video id's are not private and exist
+				# Passing a group of ids returns only available videos
+				for item in response.json()['items']:
+					self.notPrivate.append(item['id'])
 		return (set(self.videoIDArray)-set(self.notPrivate))
 

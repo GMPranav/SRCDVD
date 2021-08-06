@@ -42,9 +42,10 @@ class TwitchAPI:
 				url = "https://api.twitch.tv/helix/videos?id=" + ids
 				response = requests.get(url, headers=self.header)
 				if response.status_code == 200:
-					# Return link if it dead
-					for i in response.json()['data']:
-						self.notPrivate.append(i['id'])
+					# List all video id's are not private and exist
+					# Passing a group of ids returns only available video
+					for data in response.json()['data']:
+						self.notPrivate.append(data['id'])
 
 			return (set(self.videoIDArray)-set(self.notPrivate))
 			# KeyError occurs if a json object without a 'status' key
