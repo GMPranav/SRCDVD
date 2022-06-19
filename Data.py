@@ -28,7 +28,7 @@ class Data:
 			stats = requests.get("https://www.speedrun.com/" + self.gameAbbriveature + "/gamestats")
 			if stats.status_code == 200:
 				self.runsCount = int(re.findall(numRuns, stats.text.replace('\t', '').replace('\n', '')).pop()\
-				.replace("Number of runs</div><div class=\"col-sm-6 row-list-text\">", "")\
+				.replace("Number of runs</div><div class=\"bs-col-sm-6 row-list-text\">", "")\
 				.replace("</div></div><div class=\"", "").replace(',', ""))
 		except IndexError:
 			print("No such abbreviation was found\n")
