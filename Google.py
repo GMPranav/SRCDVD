@@ -16,7 +16,7 @@ class GoogleAPI:
 		if response.status_code == 400:
 			print("[SKIP] API key not valid. Please pass a valid API key.")
 			return False
-		if response.status_code == 200:
+		if response.ok:
 			return True
 
 	def getVideoID(self, videoLink):
@@ -30,7 +30,7 @@ class GoogleAPI:
 			ids = ','.join([str(x) for x in self.videoIDArray[offset:self.offset+offset]])
 			url = "https://www.googleapis.com/youtube/v3/videos?id=" + ids + "&part=status&key="+self.apiKey
 			response = requests.get(url)
-			if response.status_code == 200:
+			if response.ok:
 				# List all video id's are not private and exist
 				# Passing a group of ids returns only available videos
 				for item in response.json()['items']:

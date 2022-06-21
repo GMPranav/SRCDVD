@@ -20,7 +20,7 @@ class TwitchAPI:
 		self.body['client_secret'] = input("Enter Client Secret: ")
 		response = requests.post(
 			'https://id.twitch.tv/oauth2/token', self.body)
-		if response.status_code == 200:
+		if response.ok:
 			self.twitchAuthAPIKey = response.json()['access_token']
 			self.header = {'Client-ID': self.body['client_id'],
 			'Authorization': "Bearer "+ self.twitchAuthAPIKey}
@@ -41,7 +41,7 @@ class TwitchAPI:
 				ids = ','.join([str(x) for x in self.videoIDArray[offset:self.offset+offset]])
 				url = "https://api.twitch.tv/helix/videos?id=" + ids
 				response = requests.get(url, headers=self.header)
-				if response.status_code == 200:
+				if response.ok:
 					# List all video id's are not private and exist
 					# Passing a group of ids returns only available video
 					for data in response.json()['data']:

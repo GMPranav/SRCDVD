@@ -20,19 +20,14 @@ class Data:
 
 	def getRuns(self):
 		try:
-			numRuns = re.compile('Number of runs.*?</div></div><div class=\"')
+			numRuns = re.compile('(Numberofruns.*?(\d{1,4},\d{1,4}))')
 			if self.gameAbbriveature == "":
 				self.gameAbbriveature = input(
 					"Enter the game's abbreviation in speedrun.com (eg. \"smb1\" for Super Mario Bros.): ")
 
 			stats = requests.get("https://www.speedrun.com/" + self.gameAbbriveature + "/gamestats")
 			if stats.ok:
-				try:
-					self.runsCount = int(re.findall(numRuns, stats.text.replace('\t', '').replace('\n', '')).pop()\
-					.replace("Number of runs</div><div class=\"bs-col-sm-6 row-list-text\">", "")\
-					.replace("</div></div><div class=\"", "").replace(',', ""))
-				except ValueError:
-					print("Someone has change CSS names. Please send report: https://github.com/GMPranav/SRCDVD/issues")
+				self.runsCount = int(re.findall(numRuns, ''.join(stats.text.split()))[0][1].replace(',', ''))
 		except IndexError:
 			print("No such abbreviation was found\n")
 
@@ -41,7 +36,7 @@ class Data:
 				self.gameAbbriveature = input("Enter the game's abbreviation in speedrun.com (eg. \"smb1\" for Super Mario Bros.): ")
 
 		response = requests.get(self.gameInfo + self.gameAbbriveature)
-		if response.status_code == 200:
+		if response.ok:
 			response = response.json()
 			self.gameName = response['data']['names']['international']
 			self.gameID = response['data']['id']
@@ -55,7 +50,7 @@ class Data:
 			url = "https://www.speedrun.com/api/v1/runs?max=200&offset=" + \
 				str(offset) + "&status=verified&game=" + self.gameID
 			response = requests.get(url)
-			if response.status_code == 200:
+			if response.ok:
 				data = response.json()['data']
 				for runs in data:
 					try:
