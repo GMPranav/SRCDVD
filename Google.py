@@ -1,6 +1,6 @@
 import requests
-import json
 import re
+import Config
 
 class GoogleAPI:
 	def __init__(self) -> None:
@@ -8,9 +8,18 @@ class GoogleAPI:
 		self.videoIDArray = []
 		self.offset = 50
 		self.notPrivate = []
+		self.config = Config.Config()
+
 
 	def auth(self):
-		self.apiKey = input("Enter your Google API Key: ")
+		if self.config.isExists():
+			googleAPI = self.config.load()['GoogleAPIKey']
+			if googleAPI:
+				self.apiKey = googleAPI
+			else:
+				self.apiKey = input("Enter your Google API Key: ")
+		else:
+			self.apiKey = input("Enter your Google API Key: ")
 		url = "https://www.googleapis.com/youtube/v3/videos?id=0&part=status&key="+self.apiKey
 		response = requests.get(url)
 		if response.status_code == 400:

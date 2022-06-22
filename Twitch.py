@@ -1,6 +1,6 @@
 import requests
-import json
 import re
+import Config
 
 class TwitchAPI:
 	def __init__(self) -> None:
@@ -14,10 +14,21 @@ class TwitchAPI:
 		self.videoIDArray = []
 		self.offset = 100
 		self.notPrivate = []
+		self.config = Config.Config()
 
 	def auth(self):
-		self.body['client_id'] = input("Enter Client-ID: ")
-		self.body['client_secret'] = input("Enter Client Secret: ")
+		if self.config.isExists:
+			TwitchClientID = self.config.load()['TwitchClientID']
+			TwitchClientSecret = self.config.load()['TwitchClientSecret']
+			if TwitchClientID and TwitchClientSecret:
+				self.body['client_id'] = TwitchClientID
+				self.body['client_secret'] = TwitchClientSecret
+			else:
+				self.body['client_id'] = input("Enter Client-ID: ")
+				self.body['client_secret'] = input("Enter Client Secret: ")
+		else:
+			self.body['client_id'] = input("Enter Client-ID: ")
+			self.body['client_secret'] = input("Enter Client Secret: ")
 		response = requests.post(
 			'https://id.twitch.tv/oauth2/token', self.body)
 		if response.ok:

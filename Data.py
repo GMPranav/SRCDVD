@@ -1,6 +1,5 @@
 import requests
 import re
-import json
 
 class Data:
 	def __init__(self) -> None:
