@@ -59,12 +59,12 @@ class Data:
 					except KeyError:
 						self.dead_runs.append(f"https://speedrun.com/{self.gameAbbriveature}/run/{runs['id']}")
 						continue
-				if responseJson.get('pagination').get('links'):
-					next_page = next((page['uri'] for page in responseJson['pagination']['links'] if page.get('rel') == 'next'), None)
-					if next_page:
-						offset += 200
-					else:
-						noMoreResults = True
+				
+				next_page = next((page.get('uri') for page in responseJson.get('pagination', {}).get('links', []) if page.get('rel') == 'next'), None)
+				if next_page:
+					offset += 200
+				else:
+					noMoreResults = True
 
 			self.youtubeLinks = [link for link in self.videoLinks for template in self.youtubeTemplate if template in link]
 			self.twitchLinks = [link for link in self.videoLinks for template in self.twitchTemplate if template in link]
