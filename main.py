@@ -12,7 +12,6 @@ if __name__ == '__main__':
 	if twitch_status or google_status:
 		missed = []
 		data = Data.Data()
-		data.getRuns()
 		data.getNameID()
 		data.getLinks()
 

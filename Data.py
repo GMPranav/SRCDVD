@@ -18,21 +18,6 @@ class Data:
 		self.dead_runs = []
 		self.offset = 200
 
-	def getRuns(self):
-		try:
-			numRuns = re.compile('Number of runs.*?</div></div><div class=\"')
-			if self.gameAbbriveature == "":
-				self.gameAbbriveature = input(
-					"Enter the game's abbreviation in speedrun.com (eg. \"smb1\" for Super Mario Bros.): ")
-
-			stats = requests.get("https://www.speedrun.com/" + self.gameAbbriveature + "/gamestats")
-			if stats.status_code == 200:
-				self.runsCount = int(re.findall(numRuns, stats.text.replace('\t', '').replace('\n', '')).pop()\
-				.replace("Number of runs</div><div class=\"col-sm-6 row-list-text\">", "")\
-				.replace("</div></div><div class=\"", "").replace(',', ""))
-		except IndexError:
-			print("No such abbreviation was found\n")
-
 	def getNameID(self):
 		if self.gameAbbriveature == "":
 				self.gameAbbriveature = input("Enter the game's abbreviation in speedrun.com (eg. \"smb1\" for Super Mario Bros.): ")
@@ -48,12 +33,15 @@ class Data:
 	# Most likely, we'll have to add some extra code to check if link to video exists in comments. (Weird)
 	#
 	def getLinks(self):
-		for offset in range(0, self.runsCount+self.offset, self.offset):
+		offset = 0
+		noMoreResults = False
+		while not noMoreResults:
 			url = "https://www.speedrun.com/api/v1/runs?max=200&offset=" + \
 				str(offset) + "&status=verified&game=" + self.gameID
 			response = requests.get(url)
 			if response.status_code == 200:
-				data = response.json()['data']
+				responseJson = response.json()
+				data = responseJson['data']
 				for runs in data:
 					try:
 						try:
@@ -72,6 +60,12 @@ class Data:
 					except KeyError:
 						self.dead_runs.append(f"https://speedrun.com/{self.gameAbbriveature}/run/{runs['id']}")
 						continue
+				if responseJson.get('pagination').get('links'):
+					next_page = next((page['uri'] for page in responseJson['pagination']['links'] if page.get('rel') == 'next'), None)
+					if next_page:
+						offset += 200
+					else:
+						noMoreResults = True
 
 			self.youtubeLinks = [link for link in self.videoLinks for template in self.youtubeTemplate if template in link]
 			self.twitchLinks = [link for link in self.videoLinks for template in self.twitchTemplate if template in link]
