@@ -1,6 +1,5 @@
 import requests
 import re
-import json
 
 class Data:
 	def __init__(self) -> None:
@@ -23,7 +22,7 @@ class Data:
 				self.gameAbbriveature = input("Enter the game's abbreviation in speedrun.com (eg. \"smb1\" for Super Mario Bros.): ")
 
 		response = requests.get(self.gameInfo + self.gameAbbriveature)
-		if response.status_code == 200:
+		if response.ok:
 			response = response.json()
 			self.gameName = response['data']['names']['international']
 			self.gameID = response['data']['id']
@@ -39,7 +38,7 @@ class Data:
 			url = "https://www.speedrun.com/api/v1/runs?max=200&offset=" + \
 				str(offset) + "&status=verified&game=" + self.gameID
 			response = requests.get(url)
-			if response.status_code == 200:
+			if response.ok:
 				responseJson = response.json()
 				data = responseJson['data']
 				for runs in data:

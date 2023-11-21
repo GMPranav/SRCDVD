@@ -22,20 +22,20 @@ if __name__ == '__main__':
 		if google_status:
 			for i in data.youtubeLinks:
 				link = google.getVideoID(i)
-			missed = google.checkVideo()
+			missed.append(google.checkVideo())
 			
 		if twitch_status:
 			for i in data.twitchLinks:
-				link = twitch.checkVideo(i)
-				if link:
-					missed.append(link)
+				link = twitch.getVideoID(i)
+			missed.append(twitch.checkVideo())
 
-		for miss in missed:
+		# Unpack missed array
+		for miss in [data for idx in range(len(missed)) for data in missed[idx]]:
 			for run in data.runsArray:
 				if miss in run['link']:
 					data.dead_runs.append(
 						f"https://speedrun.com/{data.gameAbbriveature}/run/{run['runID']}")
-
+		
 		file = open("missinglinks.txt", "w")
 		for link in list(set(data.dead_runs)):
 			file.write(link)
