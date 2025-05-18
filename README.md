@@ -44,11 +44,9 @@ The google and twitch APIs require authentication to use, so you will have to ge
 ![image](https://user-images.githubusercontent.com/54983451/126482065-f7475550-c462-491b-b757-152e54d50409.png)
 
 ## How to use the program:
-- Download the latest release - https://github.com/GMPranav/SRCDVD/releases/download/v1.0/main.exe (non-Windows users can download the code directy and exucute main.py through python)
+- Download the code and run main.py using python.
   
-- I would advise keeping the executuable in a seperate folder.
-  
-- Run the program. Enter the your Twitch Client ID and secret and then your Google API key.
+- Enter the your Twitch Client ID and secret and then your Google API key.
 
 - Enter the game's abbreviation in speedrun.com. For example, for Prince of Persia, it is "pop1".<br>
   ![image](https://user-images.githubusercontent.com/54983451/126490521-751df7cf-9e0a-4a18-b2be-1c563b830e32.png)<br>
