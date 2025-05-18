@@ -49,7 +49,7 @@ class TwitchAPI:
 	def checkVideo(self):
 		try:
 			for offset in range(0, len(self.videoIDArray)+self.offset, self.offset):
-				ids = ','.join([str(x) for x in self.videoIDArray[offset:self.offset+offset]])
+				ids = '&id='.join([str(x) for x in self.videoIDArray[offset:self.offset+offset]])
 				url = "https://api.twitch.tv/helix/videos?id=" + ids
 				response = requests.get(url, headers=self.header)
 				if response.ok:
