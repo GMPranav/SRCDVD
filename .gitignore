@@ -1,2 +1,5 @@
 __pycache__
 *.txt
+config.json
+google_oauth.json
+google_token.pickle

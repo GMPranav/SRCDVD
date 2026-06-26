@@ -7,7 +7,8 @@ if __name__ == '__main__':
 	twitch = Twitch.TwitchAPI()
 	google = Google.GoogleAPI()
 
-	twitch_status = twitch.auth()
+	# twitch_status = twitch.auth()
+	twitch_status = False
 	google_status = google.auth()
 	if twitch_status or google_status:
 		missed = []
